@@ -16,6 +16,13 @@ php artisan up
 
 # show commands options
 php artisan help migrate
+
+# show active routes
+php artisan route:list
+# create file cache routes to faster route access
+php artisan route:cache
+# Remove cache route file
+php artisan route:clear
 ```
 
 ## 3. Rotas
@@ -61,4 +68,70 @@ Route::view('/contact', 'site/about/contact');
 
 // name
 Route::view('/contact', 'site/about/contact')->name('my.contact');
+
+// group routes by refix
+Route::prefix('blog')->group(function() {
+    Route::get('/post', function() {
+        return 'posts';
+    });
+
+    Route::get('/post/{slug}', function(string $slug) {
+        return "single post {$slug}";
+    });
+
+    Route::get('/category', function() {
+        return 'categories of post';
+    });
+});
+
+// group routes by name
+Route::name('admin.')->group(function() {
+    Route::get('/admin/dashboard', function() {
+        return 'admin dashboard';
+    })->name('dashboard');
+    
+    Route::get('/admin/post', function() {
+        return 'admin post';
+    })->name('post');
+});
+
+# group routes by prefix end name
+Route::group(['prefix'=>'person', 'as'=>'person.'], function() {
+    Route::get('/', function() {
+        return 'person datas';
+    })->name('index');
+    
+    Route::get('local', function() {
+        return 'person local';
+    })->name('lcoal');
+    
+    Route::get('contact', function() {
+        return 'person contact';
+    })->name('contact');
+});
+```
+
+## 4. Controller
+
+path `app/Http/Controllers`
+
+```bash
+# create in terminal controller
+php artisan make:controller HomeContoller
+
+# create route resource
+php artisan make:controller ProductContoller --resource
+```
+
+create route to controller
+
+```php
+<?php
+namespace App\Http\Controllers;
+
+Route::get('/about', [HomeController::class, 'index']);
+
+# route resource
+# atation is `products` no `product`
+Route::resource('products', ProductContoller::class);
 ```
