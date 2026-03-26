@@ -8,10 +8,11 @@
 # list artisan commands
 php artisan list
 
-# server
+# start app web server
 php artisan serve
-
+# disable server
 php artisan dow
+# enable server
 php artisan up
 
 # show commands options
@@ -36,7 +37,7 @@ Add new route
 
 use Illuminate\Support\Facades\Route;
 
-// fault url
+// dault url
 Route::get('/', function () {
     return view('welcome');
 });
@@ -135,3 +136,46 @@ Route::get('/about', [HomeController::class, 'index']);
 # atation is `products` no `product`
 Route::resource('products', ProductContoller::class);
 ```
+
+## 5. Migrations
+
+path `database/migrations`.
+
+```bash
+# create migrations
+php artisan make:migration create_products_table
+#or
+php artisan make:migration --create=products
+
+# execute migrateions
+php artisan migrate
+
+# change table name
+php artisan make:migration alter_products_table_name
+```
+
+```php
+# in up function
+public function up() {
+    Schema::rename('products', 'products_sp');
+}
+
+```
+
+```bash
+php artisan migrate:fresh
+php artisan migrate:install
+php artisan migrate:refresh
+php artisan migrate:reset
+php artisan migrate:rollback
+php artisan migrate:status
+
+# drop table
+php artisan make:migration drop_products_table
+```
+
+```php
+# in up function
+public function up() {
+    Schema::dropIfExists('products');
+}

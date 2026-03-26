@@ -1,0 +1,4 @@
+# Prompt 1
+Crie um PDR, para um blog simples que deve ser criado com PHP usando laravel. o blog é voltado para TI, com nome "MTec", e deve ter as seguinte páginas: home, posts, categorias, autores e sobre. O blog deve ter um painel de administração com três níveis de utilizadores admin, autores e visitantes. Preciso que para o front and se use html, css puro e js puro para as páginas públicas, mas no front and no painel de administração (para todos utilizadores) use o bootstrap. No que toca features o blog deve ter sistema de busca, paginação, login e upload de imagens.
+
+# Prompt 2
